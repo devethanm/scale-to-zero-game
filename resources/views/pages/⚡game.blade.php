@@ -451,9 +451,9 @@ new #[Title('Guess the Scale to Zero')] class extends Component
         </div>
     </div>
 
-    {{-- Right column: the leaderboard, desktop only — phones play, the booth TV shows /board --}}
-    <aside class="absolute top-6 right-6 z-10 hidden max-h-[calc(100%-3rem)] w-80 lg:block xl:top-8 xl:right-8 xl:max-h-[calc(100%-4rem)] xl:w-96">
-        <div class="max-h-full overflow-y-auto rounded-2xl bg-white/85 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md xl:p-7">
+    {{-- Right column: the leaderboard and a QR code so visitors can play on their own phone. Desktop only — phones play, the booth TV shows /board --}}
+    <aside class="absolute top-6 right-6 z-10 hidden max-h-[calc(100%-3rem)] w-80 flex-col gap-4 lg:flex xl:top-8 xl:right-8 xl:max-h-[calc(100%-4rem)] xl:w-96 xl:gap-5">
+        <div class="min-h-0 overflow-y-auto rounded-2xl bg-white/85 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md xl:p-7">
             <h2 class="font-mono text-xs font-medium tracking-wide text-slate-400 uppercase xl:text-sm">Leaderboard</h2>
 
             @if ($this->leaderboard->isEmpty())
@@ -469,6 +469,19 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                     @endforeach
                 </ol>
             @endif
+        </div>
+
+        <div class="flex shrink-0 flex-col items-center gap-4 rounded-2xl bg-white/85 p-6 text-center shadow-lg ring-1 ring-black/5 backdrop-blur-md xl:gap-5 xl:p-7">
+            <h2 class="self-start font-mono text-xs font-medium tracking-wide text-slate-400 uppercase xl:text-sm">Play on your phone</h2>
+            <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=480x480&margin=0&data={{ urlencode(url('/')) }}"
+                alt="QR code linking to the game"
+                class="aspect-square w-[min(14rem,28vh)] rounded-xl bg-white p-3 ring-1 ring-black/5 xl:w-[min(18rem,28vh)]"
+            />
+            <div class="flex flex-col gap-1">
+                <p class="text-xl font-semibold tracking-tight xl:text-2xl">Scan to play</p>
+                <p class="text-sm text-pretty text-slate-500 xl:text-base">Enter your details and make your guess on your own phone.</p>
+            </div>
         </div>
     </aside>
 </div>
