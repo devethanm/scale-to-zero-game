@@ -37,7 +37,7 @@ return [
 
     'round_timeout_ms' => 30000,
 
-    'server_region' => env('GAME_SERVER_REGION', 'Frankfurt'),
+    'server_region' => env('GAME_SERVER_REGION', 'Sydney'),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,34 +66,34 @@ return [
 
     'targets' => [
         [
-            'name' => 'Laravel Live DK 1',
-            'url' => 'https://laravellivedk-1-production-vrjeop.laravel.cloud',
-            'application_id' => 'app-a27a56ed-5eca-49e5-92d3-085d25f18445',
-            'environment_id' => 'env-a27a56ef-a3ec-47cb-bfe1-695132f8a57b',
+            'name' => 'Sydney 1',
+            'url' => 'https://scale-to-zero-target-1-production-lwhlwv.laravel-demo.cloud',
+            'application_id' => 'app-a324493f-4cd6-422f-a96f-aaca6382d77c',
+            'environment_id' => 'env-a324493f-6548-4ef8-ac70-001f12e2e037',
         ],
         [
-            'name' => 'Laravel Live DK 2',
-            'url' => 'https://laravellivedk-2-production-mf18nf.laravel.cloud',
-            'application_id' => 'app-a27a5714-cb51-402d-bd66-695292b498eb',
-            'environment_id' => 'env-a27a5716-fc57-4a9b-bbbf-a21fe2ae37b7',
+            'name' => 'Sydney 2',
+            'url' => 'https://scale-to-zero-target-2-production-v6dyta.laravel-demo.cloud',
+            'application_id' => 'app-a3244a8f-8a67-4be4-b6c3-87f8fd124bdd',
+            'environment_id' => 'env-a3244a92-30a6-4190-a00e-a1eead75b36e',
         ],
         [
-            'name' => 'Laravel Live DK 3',
-            'url' => 'https://laravellivedk-3-production-s6dbyj.laravel.cloud',
-            'application_id' => 'app-a27a573c-0c06-4c73-89e1-f78a179d5c04',
-            'environment_id' => 'env-a27a573d-e6ac-4baf-ba79-d47649c0c4f9',
+            'name' => 'Sydney 3',
+            'url' => 'https://scale-to-zero-target-3-production-cv987p.laravel-demo.cloud',
+            'application_id' => 'app-a3244aa5-48f0-40cd-ab57-8cc151240068',
+            'environment_id' => 'env-a3244aa7-c144-4657-8f75-07feb0677690',
         ],
         [
-            'name' => 'Laravel Live DK 4',
-            'url' => 'https://laravellivedk-4-production-i4vbvs.laravel.cloud',
-            'application_id' => 'app-a27a5793-6401-413e-9217-cb9c0a0ff954',
-            'environment_id' => 'env-a27a5795-2afa-48e6-b56a-c2b90b441c05',
+            'name' => 'Sydney 4',
+            'url' => 'https://scale-to-zero-target-4-production-da8lup.laravel-demo.cloud',
+            'application_id' => 'app-a3244ab4-833d-4d30-aba0-d05f025e4594',
+            'environment_id' => 'env-a3244ab7-2baf-48da-a5b9-164536a683bc',
         ],
         [
-            'name' => 'Laravel Live DK 5',
-            'url' => 'https://laravellivedk-5-production-vu4gqx.laravel.cloud',
-            'application_id' => 'app-a27a57b3-f77d-4935-b90a-f14194c96fad',
-            'environment_id' => 'env-a27a57b5-f565-474a-8f47-6dfa260c0e8f',
+            'name' => 'Sydney 5',
+            'url' => 'https://scale-to-zero-target-5-production-reuzoo.laravel-demo.cloud',
+            'application_id' => 'app-a3244ac1-b9b5-423b-8c51-d5219146a641',
+            'environment_id' => 'env-a3244ac4-0ecb-4493-818a-cba9bce4c060',
         ],
     ],
 
