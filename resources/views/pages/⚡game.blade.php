@@ -258,6 +258,11 @@ new #[Title('Guess the Scale to Zero')] class extends Component
         <div class="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center lg:bottom-6">
             <p class="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-400 shadow-xs ring-1 ring-black/5 md:text-base">😴 I'm sleeping…</p>
         </div>
+        {{-- Mirrors the logo on the target apps' page (same position and size, faded like the
+             scrim over the woken page), so the logo stays put when the woken page covers it --}}
+        <div class="pointer-events-none absolute inset-x-0 top-0 flex justify-center px-6 pt-[clamp(1.25rem,3.5dvh,2.5rem)]">
+            <img src="{{ asset('images/laravel-cloud.svg') }}" alt="Laravel Cloud" class="h-auto w-[min(34rem,72vw)] opacity-60" />
+        </div>
         <iframe
             id="wake-frame"
             title="Scale to zero preview"
