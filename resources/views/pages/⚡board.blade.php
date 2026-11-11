@@ -38,7 +38,10 @@ new #[Title('Leaderboard — Guess the Scale to Zero')] class extends Component
     <div class="relative z-10 flex h-full gap-8 p-8 xl:gap-10 xl:p-12">
         {{-- Left: the big leaderboard --}}
         <main class="flex min-w-0 flex-[3] flex-col gap-8">
-            <h1 class="text-4xl font-semibold tracking-tight xl:text-6xl">Guess the <span class="font-serif italic">scale to zero</span> 💤</h1>
+            <div class="flex items-end justify-between gap-8">
+                <h1 class="text-4xl leading-[1.05] font-medium tracking-[-0.045em] xl:text-7xl">Guess the <span class="text-cloud">scale to zero</span> 💤</h1>
+                <x-brand-lockup class="shrink-0 text-2xl xl:text-4xl" />
+            </div>
 
             <div class="flex min-h-0 flex-1 flex-col rounded-3xl bg-white/85 p-8 shadow-2xl ring-1 ring-black/5 backdrop-blur-md xl:p-10">
                 <h2 class="font-mono text-sm font-medium tracking-wide text-slate-400 uppercase xl:text-base">Leaderboard</h2>
@@ -96,7 +99,6 @@ new #[Title('Leaderboard — Guess the Scale to Zero')] class extends Component
                 </div>
             </div>
 
-            <p class="self-end rounded-full bg-white px-3 py-1.5 font-mono text-xs tracking-wide text-slate-500 uppercase shadow-xs ring-1 ring-black/5">Powered by Laravel Cloud</p>
         </aside>
     </div>
 </div>
