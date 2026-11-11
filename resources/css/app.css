@@ -44,6 +44,11 @@
 }
 
 @layer base {
+    /* Grow everything a little on big booth TVs; phones and laptops stay at 16px. */
+    html {
+        font-size: clamp(16px, 0.35vw + 10px, 22px);
+    }
+
     /* Buttons show their own pressed state, so drop the grey tap flash on phones. */
     button {
         -webkit-tap-highlight-color: transparent;

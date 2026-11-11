@@ -275,8 +275,10 @@ new #[Title('Guess the Scale to Zero')] class extends Component
 
         {{-- Leaderboard | game | QR code. The side columns are equal width so the game sits dead centre; phones only get the game --}}
         <div class="absolute inset-0 z-20 overflow-y-auto">
-            <div class="grid min-h-full items-center gap-6 p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_minmax(0,42rem)_minmax(0,1fr)] xl:gap-10 xl:p-10">
-                <aside class="hidden flex-col rounded-2xl border border-line bg-white/90 shadow-glow backdrop-blur-md lg:flex">
+            {{-- Sizes scale with both viewport width and height so the whole layout fits any screen without scrolling.
+                 The bottom padding keeps the "I'm sleeping" pill clear of the card. --}}
+            <div class="grid min-h-full content-center items-start gap-x-[clamp(1rem,2.2vw,3rem)] gap-y-[clamp(0.75rem,2.5vh,1.75rem)] px-4 pt-[clamp(1rem,3vh,2.5rem)] pb-[clamp(4.5rem,9vh,6rem)] sm:px-6 lg:grid-cols-[minmax(15rem,1fr)_minmax(0,clamp(28rem,40vw,52rem))_minmax(15rem,1fr)] lg:px-[clamp(1.5rem,2.5vw,3.5rem)]">
+                <aside class="hidden w-full max-w-[28rem] flex-col justify-self-end lg:col-start-1 lg:row-start-2 rounded-2xl border border-line bg-white/90 shadow-glow backdrop-blur-md lg:flex">
                     <h2 class="border-b border-line px-6 py-4 font-mono text-xs font-medium tracking-[0.08em] text-slate-400 uppercase xl:px-7 xl:py-5 xl:text-sm">Leaderboard</h2>
 
                     @if ($this->leaderboard->isEmpty())
@@ -297,14 +299,15 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                     @endif
                 </aside>
 
-                <main class="mx-auto flex w-full max-w-md flex-col items-center gap-5 sm:max-w-lg lg:max-w-none xl:gap-6">
-                    <div wire:ignore wire:key="wake-stopwatch-wrap">
-                        <div id="wake-stopwatch" class="rounded-full border border-line bg-white px-6 py-2.5 font-mono text-4xl font-medium tracking-tight tabular-nums shadow-glow transition-colors duration-300 md:px-8 md:py-3 md:text-5xl xl:text-7xl">0 ms</div>
+                {{-- On large screens the stopwatch gets its own row, so the card and both side panels line up at the top --}}
+                <main class="mx-auto flex w-full max-w-md flex-col items-center gap-[clamp(0.75rem,2.5vh,1.75rem)] sm:max-w-lg lg:contents">
+                    <div wire:ignore wire:key="wake-stopwatch-wrap" class="lg:col-start-2 lg:row-start-1 lg:justify-self-center">
+                        <div id="wake-stopwatch" class="rounded-full border border-line bg-white px-[1.4em] py-[0.3em] font-mono text-[clamp(2rem,min(4.5vw,7vh),4.5rem)] leading-tight font-medium tracking-tight tabular-nums shadow-glow transition-colors duration-300">0 ms</div>
                     </div>
 
                     {{-- Backdrop blur is too heavy for phone GPUs while typing, so it's desktop-only --}}
-                    <div class="flex w-full flex-col gap-5 rounded-2xl border border-line bg-white p-6 shadow-glow md:gap-6 md:p-8 lg:bg-white/95 lg:backdrop-blur-sm xl:p-10">
-                        <div class="flex flex-col items-start gap-3 xl:gap-4">
+                    <div class="@container flex w-full flex-col gap-[clamp(1rem,2.5vh,1.75rem)] rounded-2xl lg:col-start-2 lg:row-start-2 border border-line bg-white p-[clamp(1.25rem,min(2.5vw,4vh),2.75rem)] shadow-glow lg:bg-white/95 lg:backdrop-blur-sm">
+                        <div class="flex flex-col items-start gap-[clamp(0.5rem,1.5vh,1rem)]">
                             <p wire:poll.5s class="inline-flex items-center gap-2 rounded-full border border-line bg-white py-1 pr-3.5 pl-3 text-xs text-slate-500 shadow-xs md:text-sm">
                                 @if ($this->readyCount > 0)
                                     <span class="relative flex size-2">
@@ -321,7 +324,7 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                                 @endif
                             </p>
 
-                            <h1 class="text-3xl leading-[1.05] font-medium tracking-[-0.045em] text-balance md:text-4xl xl:text-6xl">Guess the <span class="text-cloud">scale to zero</span> 💤</h1>
+                            <h1 class="text-[clamp(1.875rem,min(3.6vw,6vh),4rem)] leading-[1.05] font-medium tracking-[-0.045em] text-balance">Guess the <span class="text-cloud">scale to zero</span> 💤</h1>
                             @unless ($lastResult)
                                 @if ($attendeeId === null)
                                     <p class="text-sm leading-relaxed text-pretty text-slate-500 md:text-base xl:text-lg">Enter your details to play, then guess how many milliseconds a Laravel Cloud app takes to wake. Closest guess wins.</p>
@@ -359,7 +362,7 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                                 <p class="text-center text-xs text-slate-400 md:text-sm lg:hidden">How'd you do? Find your name on the leaderboard.</p>
                             </div>
                         @elseif ($attendeeId === null)
-                            <form wire:key="register-step" wire:submit="register" class="grid gap-4 xl:grid-cols-2">
+                            <form wire:key="register-step" wire:submit="register" class="grid gap-4 @sm:grid-cols-2">
                                 <div class="flex flex-col gap-1.5">
                                     <label for="player-name" class="text-sm font-medium text-slate-700 xl:text-base">Your name</label>
                                     <input
@@ -401,7 +404,7 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                                     type="submit"
                                     wire:loading.attr="disabled"
                                     wire:target="register"
-                                    class="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-cloud px-4 text-sm font-medium text-white transition-[background-color,transform,opacity] duration-150 hover:bg-cloud/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cloud active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 md:h-12 md:text-base xl:col-span-2 xl:h-14 xl:text-lg"
+                                    class="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-cloud px-4 text-sm font-medium text-white transition-[background-color,transform,opacity] duration-150 hover:bg-cloud/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cloud active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 md:h-12 md:text-base @sm:col-span-2 xl:h-14 xl:text-lg"
                                 >
                                     <span wire:loading.remove wire:target="register">Continue to your guess</span>
                                     <span wire:loading.inline-flex wire:target="register" class="items-center gap-2">
@@ -413,10 +416,10 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                                     </span>
                                 </button>
 
-                                <p class="text-xs leading-relaxed text-pretty text-slate-400 xl:col-span-2 xl:text-sm">By continuing, you agree that the event organizers may use these details to follow up with you after the event.</p>
+                                <p class="text-xs leading-relaxed text-pretty text-slate-400 @sm:col-span-2 xl:text-sm">By continuing, you agree that the event organizers may use these details to follow up with you after the event.</p>
 
                                 @error('registration')
-                                    <p class="text-sm text-red-600 motion-safe:animate-rise-in xl:col-span-2">{{ $message }}</p>
+                                    <p class="text-sm text-red-600 motion-safe:animate-rise-in @sm:col-span-2">{{ $message }}</p>
                                 @enderror
                             </form>
                         @else
@@ -480,20 +483,20 @@ new #[Title('Guess the Scale to Zero')] class extends Component
                     </div>
                 </main>
 
-                <aside class="hidden flex-col items-center gap-5 rounded-2xl border border-line bg-white/90 p-6 text-center shadow-glow backdrop-blur-md lg:flex xl:gap-6 xl:p-8">
-                    <p class="inline-flex items-center gap-2 self-start font-mono text-xs font-medium tracking-[0.08em] text-cloud uppercase xl:text-sm">
+                <aside class="hidden w-full max-w-[28rem] flex-col items-center lg:col-start-3 lg:row-start-2 gap-[clamp(1rem,2.5vh,1.5rem)] justify-self-start rounded-2xl border border-line bg-white/90 p-[clamp(1.25rem,2vw,2rem)] text-center shadow-glow backdrop-blur-md lg:flex">
+                    <p class="inline-flex items-center gap-2 self-start font-mono text-xs font-medium tracking-[0.08em] whitespace-nowrap text-cloud uppercase xl:text-sm">
                         <span class="size-2 rounded-full bg-emerald-500"></span>
                         Play on your phone
                     </p>
                     <img
                         src="https://api.qrserver.com/v1/create-qr-code/?size=480x480&margin=0&data={{ urlencode(url('/')) }}"
                         alt="QR code linking to the game"
-                        class="aspect-square w-full max-w-[min(18rem,32vh)] rounded-xl border border-line bg-white p-3 xl:max-w-[min(22rem,34vh)]"
+                        class="aspect-square w-full max-w-[min(22rem,34vh)] rounded-xl border border-line bg-white p-3"
                     />
-                    <div class="flex flex-col gap-1.5">
+                    <div class="flex w-full min-w-0 flex-col gap-1.5">
                         <p class="text-2xl font-medium tracking-[-0.03em] xl:text-3xl">Scan to play</p>
-                        <p class="text-sm text-pretty text-slate-500 xl:text-base">Enter your details and make your guess on your own phone.</p>
-                        <code class="mt-1 font-mono text-xs text-slate-400 xl:text-sm">{{ request()->getHost() }}</code>
+                        <p class="text-sm text-pretty text-slate-500 xl:text-base">Make your guess on your own phone.</p>
+                        <code class="mt-1 truncate font-mono text-xs text-slate-400 xl:text-sm">{{ request()->getHost() }}</code>
                     </div>
                 </aside>
             </div>
